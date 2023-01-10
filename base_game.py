@@ -1,5 +1,7 @@
 import random
+import matplotlib.pyplot as plt 
 balance=1000
+balance_history=[balance]
 name= input("What is your name?")
 def blackjack():
     global balance
@@ -107,6 +109,7 @@ def blackjack():
             balance-=player.bet
             print("Dealers total of",str(dealer.total),"is greater than",player.name+"'s total of",str(player.total))
             print("You lose $"+str(player.bet),"bringing your balance down to $"+str(balance))
+    balance_history.append(balance)
     play_again=input("Would you like to play again?")
     # allows player to play again if they want
     # only allowed if balance is positive
@@ -119,3 +122,12 @@ def blackjack():
     else:
         print("Thank you for playing",player.name,"! You ended with a total balance of $"+str(balance))
 blackjack()
+
+#plots P&L chart to show users balance progress over the course of the game by hand
+plt.plot(balance_history)
+plt.title(name+"'s P%L chart")
+plt.xticks(range(0,len(balance_history)))
+plt.xlabel("Hands")
+plt.ylabel("Balance")
+print(balance_history)
+plt.show()

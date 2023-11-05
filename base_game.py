@@ -44,7 +44,7 @@ def blackjack(name, balance):
             self.total += card_values[self.hand[-1]]
             print("You drew a", card, "bringing your total to", str(self.total))
 
-    # dealer class defines dealer's first card 
+    # dealer class defines dealer's first card
     class Dealer():
         def __init__(self):
             self.hand = []
@@ -66,16 +66,16 @@ def blackjack(name, balance):
     # makes variable out of player and dealer classes; 'Ben' is just a placeholder and can be changed
     player = Player(name, Player.bet)
     dealer = Dealer()
-    hit = 'Yes'
+    hit = 'Y'
     busted = False
     # While the player keeps inputting 'Yes' they will continue to recieve another card to their total
-    # Loop will end when player decides he doesn't want to draw anymore or his score>21 
-    # If score>21, player loses his original bet 
-    while hit.lower() == 'yes':
+    # Loop will end when player decides he doesn't want to draw anymore or his score>21
+    # If score>21, player loses his original bet
+    while hit.lower() == 'y':
         hit = input("Would you like to hit? ")
-        if hit.lower() == 'Yes':
+        if hit.lower() == 'y':
             player.hit()
-            # for loop changes players Ace card value from an 11 to a 1 if need be 
+            # for loop changes players Ace card value from an 11 to a 1 if need be
             while player.total > 21 and 'A' in player.hand:
                 for i in player.hand:
                     if i == 'A':
@@ -83,12 +83,12 @@ def blackjack(name, balance):
                         player.hand.remove(i)
                         print("Changed A value to 1 bringing total to", str(player.total))
             if player.total > 21:
-                hit = 'no'
+                hit = 'n'
                 balance -= player.bet
                 print("Sorry, your busted")
                 print("You lost $" + str(player.bet), "bringing your balance down to $" + str(balance))
                 busted = True
-    # only activates if player does not bust while drawing 
+    # only activates if player does not bust while drawing
     # will continue drawing cards until dealer.total>=17
     while dealer.total <= 17 and busted == False:
         if busted == False:
@@ -124,7 +124,7 @@ def blackjack(name, balance):
     play_again = input("Would you like to play again? ")
     # allows player to play again if they want
     # only allowed if balance is positive
-    if play_again.lower() == 'yes':
+    if play_again.lower() == 'y':
         if balance <= 0:
             print("Sorry, not enough funds. Your current balance is $" + str(balance))
             print("Thank you for playing! We hope to see you again soon.")
